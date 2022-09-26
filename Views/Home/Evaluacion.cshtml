@@ -1,0 +1,92 @@
+﻿@model List<ProspectosModel>
+@{
+    ViewData["Title"] = "Evaluacion";
+}
+
+<h1>Listado</h1>
+
+<div class="recovery-container">
+    <div>
+        @foreach (var item in Model)
+        {
+            <table class="table table-bordered" style="text-align:center" id="registro-form">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Calle</th>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Colonia</th>
+                    <th scope="col">Codigo Postal</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">RFC</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Descripcion</th>
+                </tr>
+            </thead>
+           
+
+            <tbody>
+                    <tr class="trMember">
+                            <td>@item.id</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.ApellidoPaterno</td>
+                            <td>@item.ApellidoMaterno</td>
+                            <td>@item.Calle</td>
+                            <td>@item.Numero</td>
+                            <td>@item.Colonia</td>
+                            <td>@item.CodigoPostal</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.RFC</td>
+                            <td>@item.Estatus</td>
+                            <td>@item.Descripcion</td>
+                    </tr>
+            </tbody>
+        </table>
+
+            <div class="d-flex flex-row">
+                <button class="btn btn-success" onclick="funAutorizar(@item.id)">Autorizar</button>
+                <button class="btn btn-success" >Rechazar</button>
+                <input name="txtDescripcion" id="@item.id" type="text" style="margin-left:30px" class="form-control" placeholder="Agrege la descripcion" >
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function funAutorizar(var id) {
+
+
+            var respuesta = {
+                res: {
+                    id: id
+                    Descripcion: document.getElementsById(id).values;
+            }
+
+        jQuery.ajax({
+            url: '@Url.Action("Index","Autorizar")',
+            type: "POST",
+            data: JSON.stringify(respuesta),
+            datatype: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                if (data.respuesta) {
+                    alert("Venta Registrada")
+
+                    location.reload();
+                }
+
+            }
+
+        })
+
+        })
+
+    </script>
+
+
+}

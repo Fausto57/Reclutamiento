@@ -1,0 +1,80 @@
+﻿@model Reclutamiento.Models.ProspectosModel
+@{
+    ViewData["Title"] = "Capturas";
+}
+
+<h4>ProspectosModel</h4>
+<hr />
+
+<h1>Capturas</h1>
+
+<div class="recovery-container">
+    <form asp-controller="Home" asp-action="Captura" method="post" id="registro-form" class="d-flex flex-column" style="text-align:center">
+        <div class="d-flex flex-column" style="width:50%; margin-left:25%;">
+
+            <label class="form-label">Nombre del prospecto</label>
+            <input asp-for="Nombre" type="text" class="form-control" >
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+
+            <label class="form-label">Apellido Paterno</label>
+            <input asp-for="ApellidoPaterno" type="text" class="form-control" >
+            <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+
+            <label class="form-label">Apellido Materno</label>
+            <input asp-for="ApellidoMaterno" type="text" class="form-control" >
+            <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+
+            <label class="form-label">Calle</label>
+            <input asp-for="Calle" type="text" class="form-control" />
+            <span asp-validation-for="Calle" class="text-danger"></span>
+
+            <label class="form-label">Numero</label>
+            <input asp-for="Numero" type="number" class="form-control" />
+            <span asp-validation-for="Numero" class="text-danger"></span>
+
+            <label class="form-label">Colonia</label>
+            <input asp-for="Colonia" type="text" class="form-control" />
+            <span asp-validation-for="Colonia" class="text-danger"></span>
+
+            <label class="form-label">Codigo Postal</label>
+            <input asp-for="CodigoPostal" type="number" class="form-control" />
+            <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+
+
+            <label class="form-label">Telefono</label>
+            <input asp-for="Telefono" type="number" class="form-control" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+
+            <label class="form-label">RFC</label>
+            <input asp-for="RFC" type="text" class="form-control" />
+            <span asp-validation-for="RFC" class="text-danger"></span>
+
+            <label class="form-label">Agregar Documentos</label>
+            <input type="file" multiple="multiple" class="form-control" />
+
+            <div class="d-flex flex-row">
+                <button id="btnEnviar" value="captura" class="btn-lg btn-success" type="submit" style="width:100px;">Enviar</button>
+                <button id="btnSalir" class="btn-lg active btn btn-danger" style="width:100px;">Salir</button>
+            </div>
+
+
+        </div>
+    </form>
+
+</div>
+<!--
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Capturas">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+-->
