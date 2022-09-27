@@ -36,7 +36,7 @@ namespace Reclutamiento.Controllers
                 return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Autoriza(string ID)
         {
             bool respuesta = false;
@@ -45,7 +45,6 @@ namespace Reclutamiento.Controllers
             {
                 int idc = Convert.ToInt32(ID);
                 var consulta = _DB.Autorizar(idc);
-                Console.WriteLine("httmp auroriza");
                 if (consulta)
                     respuesta = true;
             }catch(Exception e)
@@ -56,7 +55,7 @@ namespace Reclutamiento.Controllers
             return Json(new { respuesta });
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult Rechaza(string ID, string Descripcion)
         {
             bool respuesta = false;
@@ -65,7 +64,6 @@ namespace Reclutamiento.Controllers
             {
                 int idc = Convert.ToInt32(ID);
                 var consulta = _DB.Rechazar(idc,Descripcion);
-                Console.WriteLine("httmp auroriza");
                 if (consulta)
                     respuesta = true;
             }

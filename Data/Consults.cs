@@ -123,7 +123,7 @@ namespace Reclutamiento.Data
                 {
                     conn.Open();
                     Console.WriteLine("Conectado autoixar");
-                    MySqlCommand cmd = new MySqlCommand("UPDATE `expediente`.`prospectos` SET `Estatus` = 'Autorizado' WHERE `id` = '"+ ID +"", conn);
+                    MySqlCommand cmd = new MySqlCommand("UPDATE `expediente`.`prospectos` SET `Estatus` = 'Autorizado' WHERE `id` = "+ ID +"", conn);
                     cmd.ExecuteNonQuery();
                 }
                 return true;
@@ -144,8 +144,6 @@ namespace Reclutamiento.Data
                 using (var conn = new MySqlConnection(conexion.getCadena()))
                 {
                     conn.Open();
-
-                    Console.WriteLine("Conectado REchazae");
                     MySqlCommand cmd = new MySqlCommand("UPDATE `expediente`.`prospectos` SET `Estatus` = 'Rechazado', Descripcion = '"+Descripcion+"' WHERE `id` = "+ID+"", conn);
                     cmd.ExecuteNonQuery();
                 }

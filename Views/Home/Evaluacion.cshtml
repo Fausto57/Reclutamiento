@@ -46,7 +46,7 @@
 
             <div class="d-flex flex-row">
                 <button class="btn btn-success" type="button" id="@item.id" onclick="funAutoriza(this.id)">Autorizar</button>
-                <button class="btn btn-success" type="button" name="@item.id" >Rechazar</button>
+                <button class="btn btn-success" type="button" id="@item.id" onclick="funRechaza(this.id)">Rechazar</button>
                 <input name="@item.id" type="text" style="margin-left:30px" class="form-control" placeholder="Agrege la descripcion"/>
             </div>
         }
@@ -56,13 +56,12 @@
 @section Scripts {
     <script>
             function funAutoriza(_id){
-            alert("Se logro")
-            console.log("el id es"+ _id)
                 
                 jQuery.ajax({
-                    type: 'POST',
-                    url: '/Home/Autoriza',
-                    data: {ID: _id},
+                    type: 'GET',
+                    url: '@Url.Action("Autoriza")',
+                    cache:true,
+                    data: { id: _id},
                     datatype: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
@@ -77,8 +76,33 @@
                     }
 
                 })
+            }         
+            
+    </script>
+
+    <script>
+        function funRechaza(_id) {
+            let evalue = document.getElementsByTagName("input")[0].value;
+
+        jQuery.ajax({
+            type: 'GET',
+            url: '@Url.Action("Rechaza")',
+            cache: true,
+            data: { id: _id, descripcion: evalue },
+            datatype: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                if (data.respuesta) {
+                    alert("Se logro")
+                    location.reload();
+                } else {
+                    alert("No Se logro")
+                }
+
             }
-            
-            
+
+        })
+        }
     </script>
 }
