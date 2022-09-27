@@ -36,42 +36,45 @@ namespace Reclutamiento.Controllers
                 return RedirectToAction("Index");
         }
 
-        public IActionResult Autoriza(int ID)
+        [HttpPost]
+        public IActionResult Autoriza(string ID)
         {
-            var datos = _DB.Obtener(ID);
+            bool respuesta = false;
 
-            Console.WriteLine("autoriza "+datos);
-            return View(datos);
+            try
+            {
+                int idc = Convert.ToInt32(ID);
+                var consulta = _DB.Autorizar(idc);
+                Console.WriteLine("httmp auroriza");
+                if (consulta)
+                    respuesta = true;
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return Json(new { respuesta });
         }
 
         [HttpPost]
-        public IActionResult Autoriza(ProspectosModel prosp)
+        public JsonResult Rechaza(string ID, string Descripcion)
         {
-            var consulta = _DB.Autorizar(prosp.id);
-            Console.WriteLine("httmp auroriza");
-            if (consulta)
-                return RedirectToAction("Listado");
-            else
-                return RedirectToAction("Index");
-        }
+            bool respuesta = false;
 
-        public IActionResult Rechaza(int ID)
-        {
-            var datos = _DB.Obtener(ID);
+            try
+            {
+                int idc = Convert.ToInt32(ID);
+                var consulta = _DB.Rechazar(idc,Descripcion);
+                Console.WriteLine("httmp auroriza");
+                if (consulta)
+                    respuesta = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
-            Console.WriteLine("rechaza "+datos);
-            return View(datos);
-        }
-
-        [HttpPost]
-        public IActionResult Rechaza(ProspectosModel prosp)
-        {
-            var consulta = _DB.Rechazar(prosp.id, prosp.Descripcion);
-            Console.WriteLine("httmp rechaza");
-            if (consulta)
-                return RedirectToAction("Listado");
-            else
-                return RedirectToAction("Index");
+            return Json(new { respuesta });
         }
 
         public IActionResult Listado()

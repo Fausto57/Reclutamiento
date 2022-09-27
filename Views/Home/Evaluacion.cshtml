@@ -26,10 +26,8 @@
                     <th scope="col">Descripcion</th>
                 </tr>
             </thead>
-           
-
             <tbody>
-                    <tr class="trMember">
+                    <tr>
                             <td>@item.id</td>
                             <td>@item.Nombre</td>
                             <td>@item.ApellidoPaterno</td>
@@ -47,46 +45,40 @@
         </table>
 
             <div class="d-flex flex-row">
-                <button class="btn btn-success" onclick="funAutorizar(@item.id)">Autorizar</button>
-                <button class="btn btn-success" >Rechazar</button>
-                <input name="txtDescripcion" id="@item.id" type="text" style="margin-left:30px" class="form-control" placeholder="Agrege la descripcion" >
+                <button class="btn btn-success" type="button" id="@item.id" onclick="funAutoriza(this.id)">Autorizar</button>
+                <button class="btn btn-success" type="button" name="@item.id" >Rechazar</button>
+                <input name="@item.id" type="text" style="margin-left:30px" class="form-control" placeholder="Agrege la descripcion"/>
             </div>
         }
     </div>
 </div>
 
-@section Scripts{
+@section Scripts {
     <script>
-        function funAutorizar(var id) {
+            function funAutoriza(_id){
+            alert("Se logro")
+            console.log("el id es"+ _id)
+                
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/Home/Autoriza',
+                    data: {ID: _id},
+                    datatype: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
 
+                        if (data.respuesta) {
+                            alert("Se logro")
+                            location.reload();
+                        }else{
+                            alert("No Se logro")
+                        }
 
-            var respuesta = {
-                res: {
-                    id: id
-                    Descripcion: document.getElementsById(id).values;
+                    }
+
+                })
             }
-
-        jQuery.ajax({
-            url: '@Url.Action("Index","Autorizar")',
-            type: "POST",
-            data: JSON.stringify(respuesta),
-            datatype: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-
-                if (data.respuesta) {
-                    alert("Venta Registrada")
-
-                    location.reload();
-                }
-
-            }
-
-        })
-
-        })
-
+            
+            
     </script>
-
-
 }
